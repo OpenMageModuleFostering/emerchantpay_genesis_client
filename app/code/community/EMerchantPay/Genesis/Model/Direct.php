@@ -565,7 +565,9 @@ class EMerchantPay_Genesis_Model_Direct
 
             $capture = $this->getHelper()->getCaptureForRefund($payment);
             if ($capture === null) {
-                throw new Exception('This transaction cannot be refunded.');
+                throw new Exception(
+                    $this->getHelper()->__('Cannot Refund')
+                );
             }
 
             $referenceId = $capture->getTxnId();
