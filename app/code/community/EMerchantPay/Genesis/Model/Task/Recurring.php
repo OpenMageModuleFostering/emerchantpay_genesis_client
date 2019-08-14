@@ -401,6 +401,8 @@ class EMerchantPay_Genesis_Model_Task_Recurring
             $profile->setState(
                 Mage_Sales_Model_Recurring_Profile::STATE_SUSPENDED
             );
+        } else {
+            $order->queueNewOrderEmail();
         }
 
         $profile->save();

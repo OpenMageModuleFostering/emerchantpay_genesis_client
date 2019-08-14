@@ -758,6 +758,8 @@ class EMerchantPay_Genesis_Model_Checkout
                 $paymentTransaction->status
             );
 
+            $order->queueNewOrderEmail();
+
             return true;
         } catch (Exception $exception) {
             Mage::logException($exception);
