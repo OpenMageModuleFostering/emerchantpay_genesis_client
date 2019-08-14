@@ -489,6 +489,9 @@ class EMerchantPay_Genesis_Model_Direct
                     )
                     ->setAmount(
                         $amount
+                    )
+                    ->setUsage(
+                        $this->getHelper()->__('Magento Capture')
                     );
 
             $genesis->execute();
@@ -560,7 +563,10 @@ class EMerchantPay_Genesis_Model_Direct
         try {
             $this->getHelper()->initClient($this->getCode());
 
-            $capture = $payment->lookupTransaction(null, Mage_Sales_Model_Order_Payment_Transaction::TYPE_CAPTURE);
+            $capture = $this->getHelper()->getCaptureForRefund($payment);
+            if ($capture === null) {
+                throw new Exception('This transaction cannot be refunded.');
+            }
 
             $referenceId = $capture->getTxnId();
 
@@ -582,7 +588,12 @@ class EMerchantPay_Genesis_Model_Direct
                     ->setCurrency(
                         $payment->getOrder()->getOrderCurrencyCode()
                     )
-                    ->setAmount($amount);
+                    ->setAmount(
+                        $amount
+                    )
+                    ->setUsage(
+                        $this->getHelper()->__('Magento Refund')
+                    );
 
             $genesis->execute();
 
@@ -673,7 +684,7 @@ class EMerchantPay_Genesis_Model_Direct
 
             $referenceId = $transactions ? reset($transactions)->getTxnId() : null;
 
-            $genesis = new \Genesis\Genesis('Financial\Void');
+            $genesis = new \Genesis\Genesis('Financial\Cancel');
 
             $genesis
                 ->request()
@@ -685,6 +696,9 @@ class EMerchantPay_Genesis_Model_Direct
                     )
                     ->setReferenceId(
                         $referenceId
+                    )
+                    ->setUsage(
+                        $this->getHelper()->__('Magento Void')
                     );
 
             $genesis->execute();
