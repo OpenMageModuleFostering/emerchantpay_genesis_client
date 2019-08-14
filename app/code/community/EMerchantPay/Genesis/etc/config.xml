@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2015 eMerchantPay Ltd.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+@author      eMerchantPay
+@copyright   2015 eMerchantPay Ltd.
+@license     http://opensource.org/licenses/gpl-2.0.php GNU General Public License, version 2 (GPL-2.0)
+-->
+<config>
+    <modules>
+       <EMerchantPay_Genesis>
+         <version>1.2.5</version>
+       </EMerchantPay_Genesis>
+    </modules>
+
+    <global>
+        <blocks>
+            <emerchantpay>
+                <class>EMerchantPay_Genesis_Block</class>
+            </emerchantpay>
+        </blocks>
+
+        <models>
+            <emerchantpay>
+                <class>EMerchantPay_Genesis_Model</class>
+            </emerchantpay>
+        </models>
+
+        <helpers>
+            <emerchantpay>
+                <class>EMerchantPay_Genesis_Helper</class>
+            </emerchantpay>
+        </helpers>
+
+        <payment>
+            <groups>
+                <emerchantpay>eMerchantPay</emerchantpay>
+            </groups>
+        </payment>
+        
+        <events>
+            <emerchantpay_genesis_init_library>
+                <observers>
+                    <EMerchantPay_Genesis>
+                        <class>EMerchantPay_Genesis_Observer_GenesisAutoLoader</class>
+                        <method>addAutoLoad</method>
+                    </EMerchantPay_Genesis>
+                </observers>
+            </emerchantpay_genesis_init_library>
+        </events>
+        
+    </global>
+
+    <frontend>
+        <routers>
+            <emerchantpay>
+                <use>standard</use>
+                <args>
+                    <module>EMerchantPay_Genesis</module>
+                    <frontName>emerchantpay</frontName>
+                </args>
+            </emerchantpay>
+        </routers>
+        <secure_url>
+            <emerchantpay>/emerchantpay/</emerchantpay>
+        </secure_url>
+        <translate>
+            <modules>
+                <EMerchantPay_Genesis>
+                    <files>
+                        <default>EMerchantPay_Genesis.csv</default>
+                    </files>
+                </EMerchantPay_Genesis>
+            </modules>
+        </translate>
+    </frontend>
+
+    <adminhtml>
+        <translate>
+            <modules>
+                <EMerchantPay_Genesis>
+                    <files>
+                        <default>EMerchantPay_Genesis.csv</default>
+                    </files>
+                </EMerchantPay_Genesis>
+            </modules>
+        </translate>
+    </adminhtml>
+
+    <default>
+        <payment>
+            <emerchantpay_direct>
+                <model>emerchantpay/direct</model>
+                <order_status>pending</order_status>
+                <title>Credit Card (eMerchantPay Direct)</title>
+                <cctypes>VI,MC,SM,AE,DI,JCB,OT</cctypes>
+                <payment_action>authorize</payment_action>
+                <group>emerchantpay</group>
+            </emerchantpay_direct>
+            <emerchantpay_checkout>
+                <model>emerchantpay/checkout</model>
+                <order_status>pending</order_status>
+                <title>Credit Card (eMerchantPay Checkout)</title>
+                <payment_action>order</payment_action>
+                <group>emerchantpay</group>
+            </emerchantpay_checkout>
+         </payment>
+    </default>
+</config>
