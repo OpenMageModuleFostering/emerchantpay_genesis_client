@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/EMerchantPay_Genesis_Client",
+    "name": "OpenMageModuleFostering\/EMerchantPay_Genesis_Client",
     "type": "magento-module",
     "license": "OSL",
     "homepage": "",
     "description": "Genesis client for Magento Community Edition ",
     "authors": [
-    {
-        "name": "eMerchantPay Ltd.",
-        "email": "chris@emerchantpay.com"
-    }
-],
+        {
+            "name": "eMerchantPay Ltd.",
+            "email": "chris@emerchantpay.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
