@@ -1,7 +1,7 @@
 {
-    "name": "OpenMageModuleFostering\/EMerchantPay_Genesis_Client",
+    "name": "openmage-module-fostering\/emerchantpay_genesis_client",
     "type": "magento-module",
-    "license": "OSL",
+    "license": "OSL-3.0",
     "homepage": "",
     "description": "Genesis client for Magento Community Edition ",
     "authors": [
